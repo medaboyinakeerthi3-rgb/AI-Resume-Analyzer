@@ -1,0 +1,79 @@
+import java.util.*;
+
+public class AIResumeAnalyzer {
+
+    static Scanner sc = new Scanner(System.in);
+
+    static String[] skills = {
+        "java", "python", "c++", "javascript",
+        "html", "css", "sql", "spring boot",
+        "mysql", "git", "github", "docker",
+        "machine learning", "data structures"
+    };
+
+    public static void main(String[] args) {
+
+        System.out.println("===== AI RESUME ANALYZER =====");
+        System.out.println("Paste your resume text below.");
+        System.out.println("Type END when finished:\n");
+
+        StringBuilder resume = new StringBuilder();
+
+        while (true) {
+            String line = sc.nextLine();
+
+            if (line.equalsIgnoreCase("END")) {
+                break;
+            }
+
+            resume.append(line).append(" ");
+        }
+
+        String text = resume.toString().toLowerCase();
+
+        System.out.println("\n===== RESUME ANALYSIS =====");
+
+        int foundSkills = 0;
+
+        System.out.println("\nDetected Skills:");
+
+        for (String skill : skills) {
+            if (text.contains(skill.toLowerCase())) {
+                System.out.println("✓ " + skill);
+                foundSkills++;
+            }
+        }
+
+        int score = (foundSkills * 100) / skills.length;
+
+        System.out.println("\nSkill Score: " + score + "%");
+
+        if (score >= 70) {
+            System.out.println("Excellent technical skill coverage!");
+        } else if (score >= 40) {
+            System.out.println("Good skill coverage. Consider adding more relevant skills.");
+        } else {
+            System.out.println("Improve your resume by adding relevant technical skills.");
+        }
+
+        System.out.println("\n===== Suggestions =====");
+
+        if (!text.contains("project")) {
+            System.out.println("- Add your projects.");
+        }
+
+        if (!text.contains("education")) {
+            System.out.println("- Add an Education section.");
+        }
+
+        if (!text.contains("experience")) {
+            System.out.println("- Add your work or internship experience.");
+        }
+
+        if (!text.contains("github")) {
+            System.out.println("- Add your GitHub profile.");
+        }
+
+        System.out.println("\nAnalysis completed!");
+    }
+}
